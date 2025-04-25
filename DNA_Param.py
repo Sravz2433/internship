@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import re
 import io
+import openpyxl
 from io import StringIO, BytesIO
 
 def process_multiple_datasets(file_content):
