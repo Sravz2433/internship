@@ -305,4 +305,4 @@ if uploaded_file is not None:
         st.error("No valid data was processed. Please check your file format.")
 
 st.markdown("---")
-st.markdown("Developed with ❤️ using Streamlit.")
+st.markdown("Developed by Sravya Sri Mallampalli")
