@@ -279,7 +279,7 @@ def to_excel_download(df):
     return formatted
 
 # --- Streamlit UI ---
-st.title("DNA Parameter Parser & Excel Formatter")
+st.title("cgDNA Parameter Parser & Excel Formatter")
 
 st.markdown("""
 Upload your DNA parameter `.txt` file (e.g., `out_Chr17_5nt_A.txt`).  
