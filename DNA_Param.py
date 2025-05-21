@@ -295,10 +295,17 @@ if uploaded_file is not None:
         st.success(f"Processed {df.shape[0]} dataset(s).")
         st.dataframe(df.head(10))  # Show a preview
         excel_bytes = to_excel_download(df)
+
+        # ---- Use the uploaded filename for download ----
+        import os
+        input_filename = uploaded_file.name
+        base, _ = os.path.splitext(input_filename)
+        excel_filename = base + ".xlsx"
+
         st.download_button(
             label="Download Formatted Excel",
             data=excel_bytes,
-            file_name="dna_parameters.xlsx",
+            file_name=excel_filename,
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
     else:
