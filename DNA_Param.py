@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import re
 import csv
+import time
 from io import StringIO, BytesIO
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill, Alignment, Font, Border, Side
@@ -289,23 +290,20 @@ The app will parse, process, and let you download a formatted Excel file.
 uploaded_file = st.file_uploader("Choose a .txt file", type="txt")
 
 if uploaded_file is not None:
+    start_time = time.time()
     with st.spinner("Processing file..."):
         df = process_uploaded_file(uploaded_file)
+    runtime = time.time() - start_time
+
     if df is not None:
         st.success(f"Processed {df.shape[0]} dataset(s).")
+        st.info(f"Processing time: {runtime:.2f} seconds")
         st.dataframe(df.head(10))  # Show a preview
         excel_bytes = to_excel_download(df)
-
-        # ---- Use the uploaded filename for download ----
-        import os
-        input_filename = uploaded_file.name
-        base, _ = os.path.splitext(input_filename)
-        excel_filename = base + ".xlsx"
-
         st.download_button(
             label="Download Formatted Excel",
             data=excel_bytes,
-            file_name=excel_filename,
+            file_name="dna_parameters.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
     else:
