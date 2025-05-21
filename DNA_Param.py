@@ -175,6 +175,24 @@ def format_excel_headers(filename, df):
         cell.font = bold_font
         cell.alignment = center_align
 
+    # ... your header formatting code ...
+
+    # Add thin borders to all header cells (rows 1-4, all columns)
+    for row in range(1, 5):  # Header rows 1 to 4
+        for col in range(1, ws.max_column + 1):
+            ws.cell(row=row, column=col).border = thin_border
+
+    # Adjust column widths for "Combined Data"
+    for idx, col_cells in enumerate(ws.iter_cols(min_row=1, max_row=ws.max_row, min_col=1, max_col=ws.max_column), start=1):
+        max_length = 0
+        for cell in col_cells:
+            try:
+                if cell.value:
+                    max_length = max(max_length, len(str(cell.value)))
+            except Exception:
+                pass
+        ws.column_dimensions[get_column_letter(idx)].width = max_length + 2
+
     # Row 4: Subheaders (numbers and AVG)
     for idx, col in enumerate(col_names, start=3):
         param_name = col.split('_')[0]
