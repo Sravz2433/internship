@@ -141,6 +141,7 @@ def format_excel_headers(filename, df):
         param_cell.fill = intra_fill
         param_cell.font = bold_font
         param_cell.alignment = center_align
+        param_cell.border = thin_border
 
     # Row 2: Intra / Inter groups
     for group, start, end in groupings:
@@ -151,6 +152,7 @@ def format_excel_headers(filename, df):
         cell.fill = inter_fill
         cell.font = bold_font
         cell.alignment = center_align
+        cell.border = thin_border
 
     # Row 3: Parameter groups (e.g., Buckle, Tilt, Roll)
     param_groupings = []
