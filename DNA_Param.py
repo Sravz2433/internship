@@ -320,6 +320,8 @@ if uploaded_file is not None:
         st.info(f"Processing time: {runtime:.2f} seconds")
         st.dataframe(df.head(10))  # Show a preview
         excel_bytes = to_excel_download(df)
+        runtime = time.time() - start_time
+        st.info(f"Excel convertion time: {runtime:.2f} seconds")
         st.download_button(
             label="Download Formatted Excel",
             data=excel_bytes,
